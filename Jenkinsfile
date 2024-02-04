@@ -3,14 +3,12 @@ def gv
 pipeline {
     agent any
 
-    parameters {
-        // string(name: 'VERSION', defaultValue: '', description: 'verison to deploy on prod')
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    tools {
+        maven 'maven:3.6'
     }
 
     stages {
-        stage("init") {
+        stage('init') {
             steps {
                 script {
                     gv = load "script.groovy"
@@ -18,35 +16,34 @@ pipeline {
             }
         }
 
-        stage("build") {
+        stage('build-jar') {
             steps {
                 script {
-                    gv.buildApp()
+                    gv.build_jar()
                 }
             }
         }
 
-        stage("test") {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
-
+        stage('test-jar') {
             steps {
                 script {
-                    gv.testApp()
+                    gv.test_jar()
                 }
             }
         }
 
-        stage("deploy") {
+        stage('build-image') {
             steps {
                 script {
-                    env.ENV = input message: 'Select the environment to deploy', ok: "Done", parameters: [choice(name: 'ENVIRONMENT', choices:['dev', 'test', 'prod'], description: '')]
+                    gv.build_image()
+                }
+            }
+        }
 
-                    gv.deployApp()
-                    echo "Deploying to ${ENV}"
+        stage('pushing-image') {
+            steps {
+                script {
+                    gv.push_image()
                 }
             }
         }
