@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('test-jar') {
+        stage('testJar') {
             steps {
                 script {
                     echo "Executing pipeline for branch $BRANCH_NAME"
@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('build-jar') {
+        stage('buildJar') {
             when {
                 expression {
                     BRANCH_NAME == 'main'
@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('build-image') {
+        stage('buildImage') {
             when {
                 expression {
                     BRANCH_NAME == 'main'
@@ -51,7 +51,7 @@ pipeline {
             }
         }
 
-        stage('push-image') {
+        stage('pushImage') {
             when {
                 expression {
                     BRANCH_NAME == 'main'

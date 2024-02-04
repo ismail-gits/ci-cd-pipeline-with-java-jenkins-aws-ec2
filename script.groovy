@@ -1,19 +1,19 @@
-def build_jar() {
+def buildJar() {
     echo "building the application..."
     sh "mvn install"
 }
 
-def test_jar() {
+def testJar() {
     echo "testing the application..."
     sh "mvn test"
 }
 
-def build_image() {
+def buildImage() {
     echo "build the docker image..."
     sh "docker build -t ismailsdockers/java-maven-app:jma-2.0.1 ."
 }
 
-def push_image() {
+def pushImage() {
     echo "pushing the docker image to docker private repository..."
     
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
