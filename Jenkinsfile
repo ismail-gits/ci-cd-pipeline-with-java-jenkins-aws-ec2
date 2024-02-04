@@ -1,5 +1,6 @@
 #!usr/bin/env groovy
 
+@Library('jenkins-shared-library')
 def gv
 
 pipeline {
@@ -18,38 +19,25 @@ pipeline {
             }
         }
 
-        stage('test-jar') {
-            steps {
-                script {
-                    echo "Executing pipeline for branch $BRANCH_NAME"
-                    gv.testJar()
-                }
-            }
-        }
-
         stage('build-jar') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 script {
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
 
         stage('build-image') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
             steps {
                 script {
-                    gv.buildImage()
+                   buildImage()
                 }
+            }
+        }
+
+        stage('deploy-image') {
+            steps {
+                gv.deployApp()
             }
         }
     }
