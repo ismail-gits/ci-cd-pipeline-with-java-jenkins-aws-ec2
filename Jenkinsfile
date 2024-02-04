@@ -19,8 +19,8 @@ pipeline {
         stage('test-jar') {
             steps {
                 script {
-                    gv.test_jar()
                     echo "Executing pipeline for branch $BRANCH_NAME"
+                    gv.test_jar()
                 }
             }
         }
