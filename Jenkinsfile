@@ -16,7 +16,21 @@ pipeline {
             }
         }
 
+        stage('test-jar') {
+            steps {
+                script {
+                    gv.test_jar()
+                    echo "Executing pipeline for branch $BRANCH_NAME"
+                }
+            }
+        }
+
         stage('build-jar') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
             steps {
                 script {
                     gv.build_jar()
@@ -24,15 +38,12 @@ pipeline {
             }
         }
 
-        stage('test-jar') {
-            steps {
-                script {
-                    gv.test_jar()
+        stage('build-image') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
                 }
             }
-        }
-
-        stage('build-image') {
             steps {
                 script {
                     gv.build_image()
@@ -41,6 +52,11 @@ pipeline {
         }
 
         stage('push-image') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
             steps {
                 script {
                     gv.push_image()
