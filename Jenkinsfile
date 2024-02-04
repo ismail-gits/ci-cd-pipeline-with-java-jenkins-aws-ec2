@@ -1,3 +1,5 @@
+#!usr/bin/env groovy
+
 def gv
 
 pipeline {
@@ -47,19 +49,6 @@ pipeline {
             steps {
                 script {
                     gv.buildImage()
-                }
-            }
-        }
-
-        stage('push-image') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
-            steps {
-                script {
-                    gv.pushImage()
                 }
             }
         }
