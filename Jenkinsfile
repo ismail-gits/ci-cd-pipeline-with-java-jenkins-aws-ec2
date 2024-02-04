@@ -11,8 +11,15 @@ pipeline {
         stage('build-jar') {
             steps {
                 script {
-                    echo "building the application..."
-                    sh "mvn install"
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
+        stage('build-jar') {
+            steps {
+                script {
+                    gv.build_jar()
                 }
             }
         }
@@ -20,8 +27,7 @@ pipeline {
         stage('test-jar') {
             steps {
                 script {
-                    echo "testing the application..."
-                    sh "mvn test"
+                    gv.test_jar()
                 }
             }
         }
@@ -29,21 +35,15 @@ pipeline {
         stage('build-image') {
             steps {
                 script {
-                    echo "build the docker image..."
-                    sh "docker build -t ismailsdockers/java-maven-app:1.1.3 ."
+                    gv.build_image()
                 }
             }
         }
 
-        stage('pushing-image') {
+        stage('push-image') {
             steps {
                 script {
-                    echo "pushing the docker image to docker private repository..."
-    
-                    withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                        sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
-                        sh "docker push ismailsdockers/java-maven-app:1.1.3"
-                    }
+                    gv.push_image()
                 }
             }
         }
