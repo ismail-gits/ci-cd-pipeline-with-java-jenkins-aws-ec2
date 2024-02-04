@@ -14,7 +14,7 @@ def build_image() {
 }
 
 def push_image() {
-    echo "pushing the docker image to docker private repository..."
+    echo "pushing the docker image to a docker private repository..."
     
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         sh "echo $PASS | docker login -u $USER --password-stdin"
