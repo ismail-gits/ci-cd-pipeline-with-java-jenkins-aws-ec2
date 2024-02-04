@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo "build the docker image..."
-                    sh "docker build -t ismailsdockers/java-maven-app:1.1.3"
+                    sh "docker build -t ismailsdockers/java-maven-app:1.1.3 ."
                 }
             }
         }
