@@ -21,18 +21,18 @@ pipeline {
         stage('test-jar') {
             steps {
                 script {
-                    echo "Executing pipeline for branch $BRANCH_NAME"
+                    // echo "Executing pipeline for branch $BRANCH_NAME"
                     gv.testJar()
                 }
             }
         }
 
         stage('build-jar') {
-            when {
+            /*when {
                 expression {
                     BRANCH_NAME == 'main'
                 }
-            }
+            }*/
             steps {
                 script {
                     gv.buildJar()
@@ -41,11 +41,11 @@ pipeline {
         }
 
         stage('build-image') {
-            when {
+            /*when {
                 expression {
                     BRANCH_NAME == 'main'
                 }
-            }
+            }*/
             steps {
                 script {
                     gv.buildImage()
