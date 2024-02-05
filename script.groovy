@@ -22,14 +22,14 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    sh "docker build -t ismailsdockers/java-maven-app/$IMAGE_VERSION ."
+    sh "docker build -t ismailsdockers/java-maven-app:$IMAGE_VERSION ."
     echo "pushing the docker image to docker private repo..."
 
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         sh "echo $PASS | docker login -u $USER --password-stdin"
     }
 
-    sh "docker push ismailsdockers/java-maven-app/$IMAGE_VERSION"
+    sh "docker push ismailsdockers/java-maven-app:$IMAGE_VERSION"
 }
 
 def deployImage() {
