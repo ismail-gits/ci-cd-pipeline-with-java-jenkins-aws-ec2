@@ -63,6 +63,11 @@ pipeline {
         stage('deploy-image') {
             when {
                 expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
+            steps {
+                script {
                     gv.deployImage()
                 }
             }
