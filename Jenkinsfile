@@ -4,7 +4,7 @@
 // @Library('jenkins-shared-library') // If library is referenced globally in system config of Jenkins
 
 library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
-    [$class: 'GitSCMSoruce',
+    [$class: 'GitSCMSource',
     remote: 'https://github.com/ismail-gits/jenkins-shared-library.git',
     credentialsId: 'docker-credentials']
 )
