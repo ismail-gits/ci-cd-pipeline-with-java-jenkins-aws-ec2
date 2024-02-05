@@ -18,10 +18,17 @@ pipeline {
             }
         }
 
+        stage('increment-version') {
+            steps {
+                script {
+                    gv.incrementVersion()
+                }
+            }
+        }
+
         stage('test-jar') {
             steps {
                 script {
-                    echo "Executing pipeline for the branch $BRANCH_NAME"
                     gv.testJar()
                 }
             }
@@ -49,6 +56,14 @@ pipeline {
             steps {
                 script {
                     gv.buildImage()
+                }
+            }
+        }
+
+        stage('deploy-image') {
+            when {
+                expression {
+                    gv.deployImage()
                 }
             }
         }
