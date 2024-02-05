@@ -27,10 +27,12 @@ pipeline {
             }
         }
 
-        stage('build-image') {
+        stage('build-push-image') {
             steps {
                 script {
                    buildImage "ismailsdockers/java-maven-app:jma-3.0.1"
+                   dockerLogin()
+                   dockerPush "ismailsdockers/java-maven-app:jma-3.0.1"
                 }
             }
         }
