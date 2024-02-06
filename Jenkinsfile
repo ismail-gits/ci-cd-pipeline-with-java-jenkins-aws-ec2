@@ -72,5 +72,18 @@ pipeline {
                 }
             }
         }
+
+        stage('commit-version-update') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
+            steps {
+                script {
+                    gv.commitVerisonUpdate()
+                }
+            }
+        }
     }
 }
