@@ -10,7 +10,7 @@ def incrementVersion() {
 
 def testJar() {
     sh "mvn clean package"
-    echo "Executing pipeline for the branch $BRANCH_NAME"
+    echo "Executing pipeline for branch $BRANCH_NAME"
     echo "testing the application..."
     sh "mvn test"
 }
