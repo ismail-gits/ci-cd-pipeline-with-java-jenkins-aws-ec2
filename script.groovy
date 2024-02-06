@@ -41,8 +41,8 @@ def commitVerisonUpdate() {
 
     withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         sh "git config --global user.email 'mohammedismail72425@gmail.com'"
-        sh "git config --global user.name 'Mohammed Ismail'"
-        
+        sh "git config --global user.name 'ismailGitlab'"
+
         sh "git status"
         sh "git branch"
         sh "git config --list"
