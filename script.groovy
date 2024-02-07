@@ -41,9 +41,9 @@ def deployImageToAwsEc2() {
 
 
     // Deploying and running docker image as a single container
-    // def dockerCmd = "docker run -d -p 8080:8080 ismailsdockers/java-maven-app:$IMAGE_VERSION"
+    // def dockerCmd = "docker run -d -p 8080:8080 $IMAGE_NAME:$IMAGE_VERSION"
     // sshagent(['EC2-server-key']) {
-    //     sh "ssh -o StrictHostKeyChecking=no ec2-user@3.110.189.113 $dockerCmd"
+    //     sh "ssh -o StrictHostKeyChecking=no <ec2-endpoint> $dockerCmd"
     // }
 
     // Deploying and running image with postgres docker image using docker-compose (multiple containers)
