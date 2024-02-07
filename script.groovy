@@ -23,6 +23,7 @@ def buildJar() {
 def buildImage() {
     echo "building the docker image..."
     sh "docker build -t ismailsdockers/java-maven-app:$IMAGE_VERSION ."
+    sh "docker build tag ismailsdockers/java-maven-app:$IMAGE_VERSION ismailsdockers/java-maven-app:latest"
     echo "pushing the docker image to docker private repo..."
 
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
@@ -30,6 +31,7 @@ def buildImage() {
     }
 
     sh "docker push ismailsdockers/java-maven-app:$IMAGE_VERSION"
+    sh "docker push ismailsdockers/java-maven-app:latest"
 }
 
 def deployImage() {
