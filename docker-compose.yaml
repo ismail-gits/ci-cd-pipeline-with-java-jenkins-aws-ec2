@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   java-maven-app:
-    image: ismailsdockers/java-maven-app:latest
+    image: ismailsdockers/java-maven-app
     ports:
       - 8080:8080
   postgres:
-    image: postgres:latest
+    image: postgres
     ports:
       - 5432:5432
     environment:
