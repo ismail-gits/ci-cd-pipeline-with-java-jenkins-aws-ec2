@@ -35,10 +35,18 @@ def buildImage() {
 def deployImage() {
     echo "deploying docker image to AWS EC2..."
 
-    def dockerCmd = "docker run -d -p 8080:8080 ismailsdockers/java-maven-app:$IMAGE_VERSION"
 
+    // Deploying and running docker image as a single container
+    // def dockerCmd = "docker run -d -p 8080:8080 ismailsdockers/java-maven-app:$IMAGE_VERSION"
+    // sshagent(['EC2-server-key']) {
+    //     sh "ssh -o StrictHostKeyChecking=no ec2-user@3.110.189.113 $dockerCmd"
+    // }
+
+    // Deploying and running image with postgres docker image using docker-compose (multiple containers)
+    def dockerComposeCmd = "docker-compose -f docker-compose.yaml up --detach"
     sshagent(['EC2-server-key']) {
-        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.110.189.113 $dockerCmd"
+        sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ec2-user@65.2.70.3:/home/ec2-user"
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@65.2.70.3 $dockerComposeCmd"
     }
 }
 
