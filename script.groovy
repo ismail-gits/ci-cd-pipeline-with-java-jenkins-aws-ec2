@@ -35,7 +35,7 @@ def buildImage() {
     sh "docker push ismailsdockers/java-maven-app:latest"
 }
 
-def deployImage() {
+def deployImageToAwsEc2() {
     echo "deploying docker image to AWS EC2..."
 
 
@@ -55,7 +55,7 @@ def deployImage() {
     }
 }
 
-def commitVerisonUpdate() {
+def commitVerisonBump() {
     echo "committing version update to git repository..."
 
     sh 'git config --global user.email "jenkins@example.com"'

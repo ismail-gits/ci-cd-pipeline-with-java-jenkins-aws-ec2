@@ -60,7 +60,7 @@ pipeline {
             }
         }
 
-        stage('deploy-image') {
+        stage('deploy-to-aws-ec2') {
             when {
                 expression {
                     BRANCH_NAME == 'main'
@@ -68,12 +68,12 @@ pipeline {
             }
             steps {
                 script {
-                    gv.deployImage()
+                    gv.deployImageToAwsEc2()
                 }
             }
         }
 
-        stage('commit-version-update') {
+        stage('commit-version-bump') {
             when {
                 expression {
                     BRANCH_NAME == 'main'
@@ -81,7 +81,7 @@ pipeline {
             }
             steps {
                 script {
-                    gv.commitVerisonUpdate()
+                    gv.commitVerisonBump()
                 }
             }
         }
