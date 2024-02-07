@@ -1,4 +1,4 @@
-# Java Maven CI/CD Pipeline
+# CI/CD Pipeline With Java, Jenkins and AWS EC2
 
 This repository contains scripts and configurations for setting up a Continuous Integration and Continuous Deployment (CI/CD) pipeline for a Java Maven application. The pipeline is designed to automate the build, test, and deployment processes using Jenkins, Docker, and AWS EC2.
 
@@ -23,7 +23,7 @@ This repository contains scripts and configurations for setting up a Continuous 
 
 1. **Clone Repository:**
    ```bash
-   git clone https://gitlab.com/ismailGitlab/jenkins-pipeline-java-maven.git
+   git clone https://gitlab.com/ismailGitlab/ci-cd-pipeline-with-java-jenkins-aws-ec2.git
 
 2. **Configure Jenkins:**
    - Install Jenkins and ensure it's properly configured with the provided `Jenkinsfile`.
