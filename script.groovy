@@ -22,15 +22,16 @@ def buildJar() {
 
 def buildImage() {
     echo "building the docker image..."
-    sh "docker build -t ismailsdockers/java-maven-app:$IMAGE_VERSION ."
-    sh "docker tag ismailsdockers/java-maven-app:$IMAGE_VERSION ismailsdockers/java-maven-app:latest"
+    env.IMAGE_NAME="ismailsdockers/java-maven-app:$IMAGE_VERSION"
+    sh "docker build -t $IMAGE_NAME ."
+    sh "docker tag $IMAGE_NAME ismailsdockers/java-maven-app:latest"
     echo "pushing the docker image to docker private repo..."
 
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         sh "echo $PASS | docker login -u $USER --password-stdin"
     }
 
-    sh "docker push ismailsdockers/java-maven-app:$IMAGE_VERSION"
+    sh "docker push $IMAGE_NAME"
     sh "docker push ismailsdockers/java-maven-app:latest"
 }
 
@@ -45,7 +46,7 @@ def deployImage() {
     // }
 
     // Deploying and running image with postgres docker image using docker-compose (multiple containers)
-    def shellCmd = "bash ./ec2-commands.sh"
+    def shellCmd = "bash ./ec2-commands.sh $IMAGE_NAME"
     sshagent(['EC2-server-key']) {
         sh "scp docker-compose.yaml ec2-user@65.2.70.3:/home/ec2-user"
         sh "scp ec2-commands.sh ec2-user@65.2.70.3:/home/ec2-user"

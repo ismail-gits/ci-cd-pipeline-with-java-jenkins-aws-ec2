@@ -2,7 +2,10 @@ version: '3.8'
 
 services:
   java-maven-app:
-    image: ismailsdockers/java-maven-app
+    # If you want latest image
+    # image: ismailsdockers/java-maven-app:latest
+    # If you want to specify dynamically
+    image: ${IMAGE_NAME}
     ports:
       - 8080:8080
   postgres:
