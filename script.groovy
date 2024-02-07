@@ -23,9 +23,9 @@ def buildJar() {
 def buildPushImage() {
     echo "building the docker image..."
 
-    env.IMAGE_NAME="ismailsdockers/java-maven-app"
+    env.IMAGE_NAME="<docker-hub-repo-name>"
     sh "docker build -t $IMAGE_NAME:$IMAGE_VERSION ."
-    sh "docker tag $IMAGE_NAME:$IMAGE_VERSION ismailsdockers/java-maven-app:latest"
+    sh "docker tag $IMAGE_NAME:$IMAGE_VERSION $IMAGE_NAME:latest"
     echo "pushing the docker image to docker private repo..."
 
     withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
@@ -48,7 +48,7 @@ def deployImageToAwsEc2() {
 
     // Deploying and running image with postgres docker image using docker-compose (multiple containers)
     def shellCmd = "bash ./ec2-commands.sh '$IMAGE_NAME:$IMAGE_VERSION'"
-    def ec2Instance = "ec2-user@65.0.110.113"
+    def ec2Instance = "<ec2-endpoint>"
     sshagent(['EC2-server-key']) {
         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml $ec2Instance:/home/ec2-user"
         sh "scp -o StrictHostKeyChecking=no ec2-commands.sh $ec2Instance:/home/ec2-user"
@@ -67,7 +67,7 @@ def commitVerisonBump() {
     sh "git config --list"
 
     withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-        sh "git remote set-url origin https://$USER:$PASS@gitlab.com/ismailGitlab/jenkins-pipeline-java-maven.git"
+        sh "git remote set-url origin https://$USER:$PASS@gitlab.com/ismailGitlab/ci-cd-pipeline-with-java-jenkins-aws-ec2.git"
     }
 
     sh "git add ."
