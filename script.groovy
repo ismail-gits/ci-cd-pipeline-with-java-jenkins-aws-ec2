@@ -17,7 +17,7 @@ def testJar() {
 
 def buildJar() {
     echo "building the application..."
-    // sh "mvn install"
+    sh "mvn install"
 }
 
 def buildPushImage() {
