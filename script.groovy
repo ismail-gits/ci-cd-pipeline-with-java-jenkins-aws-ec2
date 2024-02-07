@@ -20,7 +20,7 @@ def buildJar() {
     // sh "mvn install"
 }
 
-def buildImage() {
+def buildPushImage() {
     echo "building the docker image..."
     env.IMAGE_NAME="ismailsdockers/java-maven-app:$IMAGE_VERSION"
     sh "docker build -t $IMAGE_NAME ."

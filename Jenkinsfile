@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-        stage('build-image') {
+        stage('build-push-image') {
             when {
                 expression {
                     BRANCH_NAME == 'main'
@@ -55,7 +55,7 @@ pipeline {
             }
             steps {
                 script {
-                    gv.buildImage()
+                    gv.buildPushImage()
                 }
             }
         }
