@@ -5,7 +5,7 @@ services:
     # If you want latest image
     # image: ismailsdockers/java-maven-app:latest
     # If you want to specify dynamically
-    image: ${IMAGE_NAME}
+    image: ${IMAGE}
     ports:
       - 8080:8080
   postgres:
