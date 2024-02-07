@@ -48,7 +48,7 @@ def deployImageToAwsEc2() {
 
     // Deploying and running image with postgres docker image using docker-compose (multiple containers)
     def shellCmd = "bash ./ec2-commands.sh '$IMAGE_NAME:$IMAGE_VERSION'"
-    def ec2Instance = "ec2-user@65.2.70.3"
+    def ec2Instance = "ec2-user@65.0.110.113"
     sshagent(['EC2-server-key']) {
         sh "scp docker-compose.yaml $ec2Instance:/home/ec2-user"
         sh "scp ec2-commands.sh $ec2Instance:/home/ec2-user"
