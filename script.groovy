@@ -17,7 +17,7 @@ def testJar() {
 
 def buildJar() {
     echo "building the application..."
-    sh "mvn install"
+    // sh "mvn install"
 }
 
 def buildImage() {
@@ -34,6 +34,12 @@ def buildImage() {
 
 def deployImage() {
     echo "deploying docker image to AWS EC2..."
+
+    def dockerCmd = "docker run -d -p 8080:8080 ismailsdockers/java-maven-app:$IMAGE_VERSION"
+
+    sshagent(['EC2-server-key']) {
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.110.189.113 $dockerCmd"
+    }
 }
 
 def commitVerisonUpdate() {
