@@ -37,7 +37,7 @@ def deployImage() {
 }
 
 def commitVerisonUpdate() {
-    echo "committing version update to git repo..."
+    echo "committing version update to git repository..."
 
     sh 'git config --global user.email "jenkins@example.com"'
     sh 'git config --global user.name "jenkins"'
