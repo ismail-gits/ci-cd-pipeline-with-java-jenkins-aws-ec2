@@ -23,7 +23,7 @@ This repository contains scripts and configurations for setting up a Continuous 
 
 1. **Clone Repository:**
    ```bash
-   git clone https://gitlab.com/ismailGitlab/ci-cd-pipeline-with-java-jenkins-aws-ec2.git
+   git clone https://github.com/ismail-gits/ci-cd-pipeline-with-java-jenkins-aws-ec2.git
 
 2. **Configure Jenkins:**
    - Install Jenkins and ensure it's properly configured with the provided `Jenkinsfile`.
